@@ -1,26 +1,30 @@
 package com.example.prueba1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MainActivity2 extends AppCompatActivity{
 
     static ArrayList<personas>list = new ArrayList<personas>();
+    private RecyclerView recycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        final Button boton = findViewById(R.id.button3);
+        recycler = findViewById(R.id.recyclerId);
+        //recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recycler.setLayoutManager(new GridLayoutManager(this, 1));
 
         if(savedInstanceState == null){
             Bundle b = getIntent().getExtras();
@@ -33,9 +37,12 @@ public class MainActivity2 extends AppCompatActivity{
 
         if(!list.isEmpty()){
 
-            imprimirTabla(list);
+            MyAdapter adapter = new MyAdapter(list);
+            recycler.setAdapter(adapter);
 
         }
+
+        final Button boton = findViewById(R.id.button3);
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,37 +62,5 @@ public class MainActivity2 extends AppCompatActivity{
 
         personas p = new personas(nombreIntent, intentosIntent, tiempoIntent);
         list.add(p);
-    }
-
-    private void imprimirTabla(ArrayList<personas> list) {
-
-        final TableLayout tbl=(TableLayout) findViewById(R.id.tableLayaout);
-
-        for(personas p : list){
-
-            TableRow row=new TableRow(this);
-            TextView nombre=new TextView(this);
-            TextView intentos=new TextView(this);
-            TextView tiempo=new TextView(this);
-
-            TableRow.LayoutParams  params1=new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT,1.0f);
-            TableRow.LayoutParams params2=new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.FILL_PARENT);
-
-            nombre.setText(p.getName());
-            intentos.setText(p.getTrys());
-            tiempo.setText(p.getTime());
-
-            nombre.setLayoutParams(params1);
-            intentos.setLayoutParams(params1);
-            tiempo.setLayoutParams(params1);
-
-            row.addView(nombre);
-            row.addView(intentos);
-            row.addView(tiempo);
-
-            row.setLayoutParams(params2);
-            tbl.addView(row);
-
-        }
     }
 }
