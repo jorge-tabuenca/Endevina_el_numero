@@ -20,7 +20,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerId"
-        android:layout_width="389dp"
+        android:layout_width="match_parent"
         android:layout_height="371dp"
         android:layout_weight="15"
         app:layout_constraintBottom_toBottomOf="parent"
