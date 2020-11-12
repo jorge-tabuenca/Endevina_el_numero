@@ -2,15 +2,14 @@ package com.example.prueba1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainActivity2 extends AppCompatActivity{
 
@@ -38,6 +37,12 @@ public class MainActivity2 extends AppCompatActivity{
         if(!list.isEmpty()){
 
             MyAdapter adapter = new MyAdapter(list);
+            Collections.sort(list, new Comparator<personas>() {
+                @Override
+                public int compare(personas o1, personas o2) {
+                    return o1.getTrys().compareTo(o2.getTrys());
+                }
+            });
             recycler.setAdapter(adapter);
 
         }
@@ -57,8 +62,8 @@ public class MainActivity2 extends AppCompatActivity{
 
     private void nuevaPersona() {
         String nombreIntent = getIntent().getExtras().getString("nombre");
-        String intentosIntent = Integer.toString(getIntent().getIntExtra("intentos", -1));
-        String tiempoIntent = Integer.toString(getIntent().getIntExtra("tiempo", -1));
+        String intentosIntent = "Intentos: " + Integer.toString(getIntent().getIntExtra("intentos", -1));
+        String tiempoIntent = "Tiempo: " + Integer.toString(getIntent().getIntExtra("tiempo", -1)) + " segundos";
 
         personas p = new personas(nombreIntent, intentosIntent, tiempoIntent);
         list.add(p);
