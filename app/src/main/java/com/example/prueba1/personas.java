@@ -1,19 +1,22 @@
 package com.example.prueba1;
 
+import android.net.Uri;
+
 public class personas {
 
     private String name;
     private String trys;
     private String time;
+    private Uri image;
 
-    public personas(String name, String trys, String time) {
+    public personas() {
+    }
+
+    public personas(String name, String trys, String time, Uri image) {
         this.name = name;
         this.trys = trys;
         this.time = time;
-    }
-
-    public personas() {
-
+        this.image = image;
     }
 
     public String getName() {
@@ -38,5 +41,13 @@ public class personas {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Uri getImage() {
+        return image;
+    }
+
+    public void setImage(Uri image) {
+        this.image = image;
     }
 }

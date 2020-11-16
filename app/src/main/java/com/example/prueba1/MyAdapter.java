@@ -1,11 +1,16 @@
 package com.example.prueba1;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolderDatos> {
@@ -48,6 +53,7 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolderDatos> 
         TextView name;
         TextView trys;
         TextView time;
+        ImageView image;
 
         public ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +61,7 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolderDatos> 
             name = itemView.findViewById(R.id.name);
             trys = itemView.findViewById(R.id.trys);
             time = itemView.findViewById(R.id.time);
+            image = itemView.findViewById(R.id.image);
 
         }
 
@@ -63,6 +70,7 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolderDatos> 
             name.setText(p.getName());
             trys.setText(p.getTrys());
             time.setText(p.getTime());
+            image.setImageURI(p.getImage());
 
         }
     }
